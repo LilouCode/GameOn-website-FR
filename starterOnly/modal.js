@@ -14,7 +14,7 @@ const formData = document.querySelectorAll(".formData");
 //ajouts
 // creations de la constante closeModal
 const closeModal = document.querySelectorAll(".close"); 
-//Liaisons des labels
+//Liaison des labels
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
