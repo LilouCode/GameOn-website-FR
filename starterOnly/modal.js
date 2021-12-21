@@ -93,6 +93,11 @@ location6.addEventListener("change", function () {
 checkbox1.addEventListener("change", function (){
   validCheckbox1(this);
 })
+// Ecouter la soumission du formulaire  
+form.addEventListener("submit", function (e){
+  e.preventDefault();
+  validForm(this);
+})
 // ********************** Validation du prénom **********************
 const validFirstName = function (firstName) {
   let msg;
@@ -121,10 +126,12 @@ const validFirstName = function (firstName) {
     firstNameError.innerHTML = "";
     firstNameError.classList.remove("text-error");
     firstName.classList.remove("text-control--error");
+    return true;
   } else {
     firstNameError.innerHTML = msg;
     firstNameError.classList.add("text-error");
     firstName.classList.add("text-control--error");
+    return false;
   }
 };
 
@@ -156,10 +163,12 @@ const validLastName = function (lastName) {
     lastNameError.innerHTML = "";
     lastNameError.classList.remove("text-error");
     lastName.classList.remove("text-control--error");
+    return true;
   } else {
     lastNameError.innerHTML = msg;
     lastNameError.classList.add("text-error");
     lastName.classList.add("text-control--error");
+    return false;
   }
 };
 
@@ -176,10 +185,12 @@ const validEmail = function (email) {
     emailError.innerHTML = "";
     emailError.classList.remove("text-error");
     email.classList.remove("text-control--error");
+    return true;
   } else {
     emailError.innerHTML = "Veuillez renseigner une adresse e-mail valide";
     emailError.classList.add("text-error");
     email.classList.add("text-control--error");
+    return false;
   }
 };
 
@@ -196,10 +207,12 @@ const validBirthdate = function (birthdate) {
     birthdateError.innerHTML = "";
     birthdateError.classList.remove("text-error");
     birthdate.classList.remove("text-control--error");
+    return true;
   } else {
     birthdateError.innerHTML = "Veuillez renseigner ce champs";
     birthdateError.classList.add("text-error");
     birthdate.classList.add("text-control--error");
+    return false;
   }
 };
 
@@ -212,41 +225,47 @@ const validQuantity = function (quantity) {
     quantityError.innerHTML = "";
     quantityError.classList.remove("text-error");
     quantity.classList.remove("text-control--error");
+    return true;
   } else {
     quantityError.innerHTML = "Veuillez renseigner ce champs";
     quantityError.classList.add("text-error");
     quantity.classList.add("text-control--error");
+    return false;
   }
 };
 
 
-quantity.addEventListener("change", function(){})
+// ********************** Validation locations **********************
 
 const validLocations = function (locations) {
   // récupération de la balise span pour le message d'erreur
   let locationsError = document.getElementById("locations_error");
 
-  let selectCity = function (locations) {
-    location1.checked == true ||
-      location2.checked == true ||
-      location3.checked == true ||
-      location4.checked == true ||
-      location5.checked == true ||
-      location6.checked == true;
-  };
+  let validQuantityCity = function(quantity){
+    if (quantity.value >0){
+      return true;
+    } else{
+      return false;
+    }
+  }
 
-  if (quantity.value > 0 && selectCity == false) {
+  if ( validQuantityCity && (location1.checked == true ||
+    location2.checked == true ||
+    location3.checked == true ||
+    location4.checked == true ||
+    location5.checked == true ||
+    location6.checked == true) ) {
+      locationsError.innerHTML = "";
+      locationsError.classList.remove("text-error");
+      locations.classList.remove("text-control--error");
+  } else {
     locationsError.innerHTML = "Veuillez remplir ce champs";
     locationsError.classList.add("text-error");
     locations.classList.add("text-control--error");
-  } else {
-    locationsError.innerHTML = "";
-    locationsError.classList.remove("text-error");
-    locations.classList.remove("text-control--error");
   }
 };
 
-// ********************** Validation locations **********************
+// ********************** Validation checkbox1 **********************
 const validCheckbox1 = function (checkbox1){
   let checkbox1Error = document.getElementById("checkbox1_error");
   if (checkbox1.checked){
