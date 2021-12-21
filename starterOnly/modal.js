@@ -20,6 +20,7 @@ const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
+const locations = document.querySelectorAll("locations");
 const location1 = document.getElementById("location1");
 const location2 = document.getElementById("location2");
 const location3 = document.getElementById("location3");
@@ -30,7 +31,6 @@ const checkbox1 = document.getElementById("checkbox1");
 const checkbox2 = document.getElementById("checkbox2");
 
 let form = document.getElementById("form");
-
 
 // launch modal form
 function launchModal() {
@@ -49,28 +49,46 @@ const removeModal = () => {
 // close modal event
 closeModal.forEach((close) => close.addEventListener("click", removeModal));
 
-
 // ******************************* Les ecoutes **********************
 // Ecouter la modification du prénom
-firstName.addEventListener("change", function() {
+firstName.addEventListener("change", function () {
   validFirstName(this);
 });
 // Ecouter la modification du nom
-lastName.addEventListener("change", function() {
+lastName.addEventListener("change", function () {
   validLastName(this);
 });
 //  Ecouter la modification de l'e-mail
 email.addEventListener("change", function () {
   validEmail(this);
-})
+});
 // Ecouter la modification de la date de naissance
-birthdate.addEventListener("change", function (){
+birthdate.addEventListener("change", function () {
   validBirthdate(this);
-})
+});
 //Ecouter la modification du nombre de tournois -input ("quantity")
-quantity.addEventListener("change", function (){
+quantity.addEventListener("change", function () {
   validQuantity(this);
-})
+});
+//Ecouter la modification des localisations
+location1.addEventListener("change", function () {
+  validLocations(this);
+});
+location2.addEventListener("change", function () {
+  validLocations(this);
+});
+location3.addEventListener("change", function () {
+  validLocations(this);
+});
+location4.addEventListener("change", function () {
+  validLocations(this);
+});
+location5.addEventListener("change", function () {
+  validLocations(this);
+});
+location6.addEventListener("change", function () {
+  validLocations(this);
+});
 // ********************** Validation du prénom **********************
 const validFirstName = function (firstName) {
   let msg;
@@ -78,13 +96,13 @@ const validFirstName = function (firstName) {
 
   //******* Doit contenir uniquement des caractères valides
   //creation de la reg exp pour la validation du prénom
-  let firstNameRegExp = new RegExp ("^[a-zA-Z-À-ÖØ-öø-ÿ]+$","g");
+  let firstNameRegExp = new RegExp("^[a-zA-Z-À-ÖØ-öø-ÿ]+$", "g");
   //test de l'expression reguliere
-  if(!firstNameRegExp.test(firstName.value)){
+  if (!firstNameRegExp.test(firstName.value)) {
     msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
   }
   //******* Doit contenir au minimum 2 caractères
-  else if (firstName.value.length < 2 ) {
+  else if (firstName.value.length < 2) {
     msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
   }
   //******* Prénom valide
@@ -95,10 +113,10 @@ const validFirstName = function (firstName) {
   //******* Affichage
   //recuperation de la balise span pour le message d'erreur
   let firstNameError = document.getElementById("first-name_error");
-  if (valid){
+  if (valid) {
     firstNameError.innerHTML = "";
     firstNameError.classList.remove("text-error");
-    firstName.classList.remove("text-control--error")
+    firstName.classList.remove("text-control--error");
   } else {
     firstNameError.innerHTML = msg;
     firstNameError.classList.add("text-error");
@@ -111,15 +129,15 @@ const validLastName = function (lastName) {
   let msg;
   let valid = false;
 
-  //******* Doit contenir uniquement des caractères valides 
+  //******* Doit contenir uniquement des caractères valides
   //creation de la reg exp pour la validation du prénom
-  let lastNameRegExp = new RegExp ("^[a-zA-Z-À-ÖØ-öø-ÿ]+$","g");
+  let lastNameRegExp = new RegExp("^[a-zA-Z-À-ÖØ-öø-ÿ]+$", "g");
   //test de l'expression reguliere
-  if(!lastNameRegExp.test(lastName.value)){
+  if (!lastNameRegExp.test(lastName.value)) {
     msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
   }
-  //******* Doit contenir au minimum 2 caractères 
-  else if (lastName.value.length < 2 ) {
+  //******* Doit contenir au minimum 2 caractères
+  else if (lastName.value.length < 2) {
     msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
   }
   //******* Nom valide *****
@@ -130,10 +148,10 @@ const validLastName = function (lastName) {
   //******* Affichage *****
   //recuperation de la balise span pour le message d'erreur
   let lastNameError = document.getElementById("last-name_error");
-  if (valid){
+  if (valid) {
     lastNameError.innerHTML = "";
     lastNameError.classList.remove("text-error");
-    lastName.classList.remove("text-control--error")
+    lastName.classList.remove("text-control--error");
   } else {
     lastNameError.innerHTML = msg;
     lastNameError.classList.add("text-error");
@@ -144,19 +162,18 @@ const validLastName = function (lastName) {
 // ********************** Validation de l'email **********************
 const validEmail = function (email) {
   //creation de la reg exp pour la validation de l'email
-  let emailRegExp = new RegExp ("^([a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-zA-Z0-9]{2,3})$", "g");
+  let emailRegExp = new RegExp("^([a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-zA-Z0-9]{2,3})$", "g");
   //test de l'expression reguliere
   let emailTest = emailRegExp.test(email.value);
   // récupération de la balise span pour le message d'erreur
   let emailError = document.getElementById("email_error");
 
   if (emailTest) {
-    emailError.innerHTML= "";
+    emailError.innerHTML = "";
     emailError.classList.remove("text-error");
     email.classList.remove("text-control--error");
-  }
-  else{
-    emailError.innerHTML= "Veuillez renseigner une adresse e-mail valide";
+  } else {
+    emailError.innerHTML = "Veuillez renseigner une adresse e-mail valide";
     emailError.classList.add("text-error");
     email.classList.add("text-control--error");
   }
@@ -165,19 +182,18 @@ const validEmail = function (email) {
 // ********************** Validation de la date de naissance **********************
 const validBirthdate = function (birthdate) {
   //creation de la reg exp pour la validation de la date de naissance
-  let birthdateRegExp = new RegExp ("^([0-9]{2})|([0-9]{2})|([0-9]{4})$", "g");
+  let birthdateRegExp = new RegExp("^([0-9]{2})|([0-9]{2})|([0-9]{4})$", "g");
   //test de l'expression reguliere
   let birthdateTest = birthdateRegExp.test(birthdate.value);
   // récupération de la balise span pour le message d'erreur
   let birthdateError = document.getElementById("birthdate_error");
 
   if (birthdateTest) {
-    birthdateError.innerHTML= "";
+    birthdateError.innerHTML = "";
     birthdateError.classList.remove("text-error");
     birthdate.classList.remove("text-control--error");
-  }
-  else {
-    birthdateError.innerHTML= "Veuillez renseigner ce champs";
+  } else {
+    birthdateError.innerHTML = "Veuillez renseigner ce champs";
     birthdateError.classList.add("text-error");
     birthdate.classList.add("text-control--error");
   }
@@ -185,36 +201,60 @@ const validBirthdate = function (birthdate) {
 
 // ********************** Validation quantity **********************
 const validQuantity = function (quantity) {
-
   // récupération de la balise span pour le message d'erreur
   let quantityError = document.getElementById("quantity_error");
 
   if (/[0-99]/.test(quantity.value) && quantity.value.trim != "") {
-    quantityError.innerHTML= "";
+    quantityError.innerHTML = "";
     quantityError.classList.remove("text-error");
     quantity.classList.remove("text-control--error");
-  }
-  else {
-    quantityError.innerHTML= "Veuillez renseigner ce champs";
+  } else {
+    quantityError.innerHTML = "Veuillez renseigner ce champs";
     quantityError.classList.add("text-error");
     quantity.classList.add("text-control--error");
   }
 };
 
+// ********************** Validation locations **********************
+quantity.addEventListener("change", function(){})
+
+const validLocations = function (locations) {
+  // récupération de la balise span pour le message d'erreur
+  let locationsError = document.getElementById("locations_error");
+
+  let selectCity = function (locations) {
+    location1.checked == true ||
+      location2.checked == true ||
+      location3.checked == true ||
+      location4.checked == true ||
+      location5.checked == true ||
+      location6.checked == true;
+  };
+
+  if (quantity.value > 0 && selectCity == false) {
+    locationsError.innerHTML = "Veuillez remplir ce champs";
+    locationsError.classList.add("text-error");
+    locations.classList.add("text-control--error");
+  } else {
+    locationsError.innerHTML = "";
+    locationsError.classList.remove("text-error");
+    locations.classList.remove("text-control--error");
+  }
+};
 // form.addEventListener("submit", function validate (e) {
-  
-//   // annulation du comportement par défaut  
+
+//   // annulation du comportement par défaut
 //   e.preventDefault();
 
 //   // validation du prénom
 //     const firstNameError = document.getElementById ("first-name_error");
-    
+
 //     //si le prénom est inférieur à 2 caractères
 //     if (firstName.value.trim = "" || firstName.value.trim < 2) {
 //       firstNameError.innerHTML = "Vous devez saisir un minimum de 2 caractère pour ce champs";
 //       firstNameError.addc
 //     }
-    
+
 //     // si le prénom contient des caractères non valides
 //     else if (!nameRegExp.test(firstName.value)) {
 //       firstNameError.innerHTML = "Vous devez saisir un nom valide";
@@ -263,7 +303,7 @@ const validQuantity = function (quantity) {
 //       birthdateError.style.color = "red";
 //     } else{
 //       validationBirthdate = true;
-//     }; 
+//     };
 
 //     //validation du nombre de tournois
 //     let quantityError = document.getElementById ("quantity_error");
@@ -274,7 +314,7 @@ const validQuantity = function (quantity) {
 //     };
 
 //     // Envoi et validation du formulaire
-//     if ((validationLastName == true) && (validationFirstName == true) && (validationEmail== true) 
+//     if ((validationLastName == true) && (validationFirstName == true) && (validationEmail== true)
 //       && (validationBirthdate== true) && (validationQuantity== true)) {
 //       $("#submit").unbind('click').click();
 //     }
