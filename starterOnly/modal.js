@@ -95,7 +95,40 @@ const validfirstName = function (firstName) {
   }
 };
 
+// ********************** Validation du nom **********************
+const validlastName = function (lastName) {
+  let msg;
+  let valid = false;
 
+  //******* Doit contenir uniquement des caractères valides *****
+  //creation de la reg exp pour la validation du prénom
+  let lastNameRegExp = new RegExp ("^[a-zA-Z-À-ÖØ-öø-ÿ]+$","g");
+  //test de l'expression reguliere
+  if(!lastNameRegExp.test(lastName.value)){
+    msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
+  }
+  //******* Doit contenir au minimum 2 caractères *****
+  else if (lastName.value.length < 2 ) {
+    msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
+  }
+  //******* Nom valide *****
+  else {
+    msg = "Ce champs est valide";
+    valid = true;
+  }
+  //******* Affichage *****
+  //recuperation de la balise span pour le message d'erreur
+  let lastNameError = document.getElementById("last-name_error");
+  if (valid){
+    lastNameError.innerHTML = "";
+    lastNameError.classList.remove("text-error");
+    lastName.classList.remove("text-control--error")
+  } else {
+    lastNameError.innerHTML = msg;
+    lastNameError.classList.add("text-error");
+    lastName.classList.add("text-control--error");
+  }
+};
 
 // form.addEventListener("submit", function validate (e) {
   
