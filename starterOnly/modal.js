@@ -63,28 +63,32 @@ lastName.addEventListener("change", function() {
 email.addEventListener("change", function () {
   validEmail(this);
 })
+// Ecouter la modification de la date de naissance
+birthdate.addEventListener("change", function (){
+  validBirthdate(this);
+})
 // ********************** Validation du prénom **********************
 const validFirstName = function (firstName) {
   let msg;
   let valid = false;
 
-  //******* Doit contenir uniquement des caractères valides *****
+  //******* Doit contenir uniquement des caractères valides
   //creation de la reg exp pour la validation du prénom
   let firstNameRegExp = new RegExp ("^[a-zA-Z-À-ÖØ-öø-ÿ]+$","g");
   //test de l'expression reguliere
   if(!firstNameRegExp.test(firstName.value)){
     msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
   }
-  //******* Doit contenir au minimum 2 caractères *****
+  //******* Doit contenir au minimum 2 caractères
   else if (firstName.value.length < 2 ) {
     msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
   }
-  //******* Prénom valide *****
+  //******* Prénom valide
   else {
     msg = "Ce champs est valide";
     valid = true;
   }
-  //******* Affichage *****
+  //******* Affichage
   //recuperation de la balise span pour le message d'erreur
   let firstNameError = document.getElementById("first-name_error");
   if (valid){
@@ -103,14 +107,14 @@ const validLastName = function (lastName) {
   let msg;
   let valid = false;
 
-  //******* Doit contenir uniquement des caractères valides *****
+  //******* Doit contenir uniquement des caractères valides 
   //creation de la reg exp pour la validation du prénom
   let lastNameRegExp = new RegExp ("^[a-zA-Z-À-ÖØ-öø-ÿ]+$","g");
   //test de l'expression reguliere
   if(!lastNameRegExp.test(lastName.value)){
     msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
   }
-  //******* Doit contenir au minimum 2 caractères *****
+  //******* Doit contenir au minimum 2 caractères 
   else if (lastName.value.length < 2 ) {
     msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
   }
@@ -154,7 +158,26 @@ const validEmail = function (email) {
   }
 };
 
+// ********************** Validation de la date de naissance **********************
+const validBirthdate = function (birthdate) {
+  //creation de la reg exp pour la validation de la date de naissance
+  let birthdateRegExp = new RegExp ("^([0-9]{2})|([0-9]{2})|([0-9]{4})$", "g");
+  //test de l'expression reguliere
+  let birthdateTest = birthdateRegExp.test(birthdate.value);
+  // récupération de la balise span pour le message d'erreur
+  let birthdateError = document.getElementById("birthdate_error");
 
+  if (birthdateTest) {
+    birthdateError.innerHTML= "";
+    birthdateError.classList.remove("text-error");
+    birthdate.classList.remove("text-control--error");
+  }
+  else {
+    birthdateError.innerHTML= "Veuillez renseigner ce champs";
+    birthdateError.classList.add("text-error");
+    birthdate.classList.add("text-control--error");
+  }
+};
 
 // form.addEventListener("submit", function validate (e) {
   
