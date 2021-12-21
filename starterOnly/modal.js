@@ -90,30 +90,38 @@ location6.addEventListener("change", function () {
   validLocations(this);
 });
 // Ecouter la modifictation de la checkbox conditions d'utilisation
-checkbox1.addEventListener("change", function (){
+checkbox1.addEventListener("change", function () {
   validCheckbox1(this);
-})
-// Ecouter la soumission du formulaire  
-form.addEventListener("submit", function (e){
+});
+// Ecouter la soumission du formulaire
+form.addEventListener("submit", function (e) {
   e.preventDefault();
-  validForm(this);
-})
+  if (
+    validFirstName(firstName) &&
+    validLastName(lastName) &&
+    validEmail(email) &&
+    validBirthdate(birthdate) &&
+    validQuantity(quantity) &&
+    validLocations(locations) &&
+    validCheckbox1(checkbox1)
+  ) {
+    form.submit();
+  }
+});
 // ********************** Validation du prénom **********************
 const validFirstName = function (firstName) {
   let msg;
   let valid = false;
-
-  //******* Doit contenir uniquement des caractères valides
-  //creation de la reg exp pour la validation du prénom
+ // creation de la reg exp pour la validation du prénom 
   let firstNameRegExp = new RegExp("^[a-zA-Z-À-ÖØ-öø-ÿ]+$", "g");
-  //test de l'expression reguliere
-  if (!firstNameRegExp.test(firstName.value)) {
-    msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
-  }
   //******* Doit contenir au minimum 2 caractères
-  else if (firstName.value.length < 2) {
+  if (firstName.value.length < 2) {
     msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
   }
+  // ******* Doit contenir uniquement des caractères valides 
+  else if (!firstNameRegExp.test(firstName.value)) {
+    msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
+  } 
   //******* Prénom valide
   else {
     msg = "Ce champs est valide";
@@ -234,50 +242,54 @@ const validQuantity = function (quantity) {
   }
 };
 
-
 // ********************** Validation locations **********************
 
 const validLocations = function (locations) {
   // récupération de la balise span pour le message d'erreur
   let locationsError = document.getElementById("locations_error");
 
-  let validQuantityCity = function(quantity){
-    if (quantity.value >0){
+  let validQuantityCity = function (quantity) {
+    if (quantity.value > 0) {
       return true;
-    } else{
+    } else {
       return false;
     }
-  }
+  };
 
-  if ( validQuantityCity && (location1.checked == true ||
-    location2.checked == true ||
-    location3.checked == true ||
-    location4.checked == true ||
-    location5.checked == true ||
-    location6.checked == true) ) {
-      locationsError.innerHTML = "";
-      locationsError.classList.remove("text-error");
-      locations.classList.remove("text-control--error");
+  if (
+    validQuantityCity &&
+    (location1.checked == true ||
+      location2.checked == true ||
+      location3.checked == true ||
+      location4.checked == true ||
+      location5.checked == true ||
+      location6.checked == true)
+  ) {
+    locationsError.innerHTML = "";
+    locationsError.classList.remove("text-error");
+    return true;
   } else {
     locationsError.innerHTML = "Veuillez remplir ce champs";
     locationsError.classList.add("text-error");
-    locations.classList.add("text-control--error");
+    return false;
   }
 };
 
 // ********************** Validation checkbox1 **********************
-const validCheckbox1 = function (checkbox1){
+const validCheckbox1 = function (checkbox1) {
   let checkbox1Error = document.getElementById("checkbox1_error");
-  if (checkbox1.checked){
+  if (checkbox1.checked) {
     checkbox1Error.innerHTML = "";
     checkbox1Error.classList.remove("text-error");
     checkbox1.classList.remove("text-control--error");
-  } else{
-    checkbox1Error.innerHTML= "Vous devez accepter les conditions d'utilisation";
+    return true;
+  } else {
+    checkbox1Error.innerHTML = "Vous devez accepter les conditions d'utilisation";
     checkbox1Error.classList.add("text-error");
     checkbox1.classList.add("text-control--error");
+    return false;
   }
-}
+};
 // form.addEventListener("submit", function validate (e) {
 
 //   // annulation du comportement par défaut
