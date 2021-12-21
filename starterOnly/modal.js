@@ -67,6 +67,10 @@ email.addEventListener("change", function () {
 birthdate.addEventListener("change", function (){
   validBirthdate(this);
 })
+//Ecouter la modification du nombre de tournois -input ("quantity")
+quantity.addEventListener("change", function (){
+  validQuantity(this);
+})
 // ********************** Validation du prénom **********************
 const validFirstName = function (firstName) {
   let msg;
@@ -176,6 +180,24 @@ const validBirthdate = function (birthdate) {
     birthdateError.innerHTML= "Veuillez renseigner ce champs";
     birthdateError.classList.add("text-error");
     birthdate.classList.add("text-control--error");
+  }
+};
+
+// ********************** Validation quantity **********************
+const validQuantity = function (quantity) {
+
+  // récupération de la balise span pour le message d'erreur
+  let quantityError = document.getElementById("quantity_error");
+
+  if (/[0-99]/.test(quantity.value) && quantity.value.trim != "") {
+    quantityError.innerHTML= "";
+    quantityError.classList.remove("text-error");
+    quantity.classList.remove("text-control--error");
+  }
+  else {
+    quantityError.innerHTML= "Veuillez renseigner ce champs";
+    quantityError.classList.add("text-error");
+    quantity.classList.add("text-control--error");
   }
 };
 
