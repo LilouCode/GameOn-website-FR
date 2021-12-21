@@ -16,7 +16,6 @@ const formData = document.querySelectorAll(".formData");
 const closeModal = document.querySelectorAll(".close");
 //Liaison des labels
 const firstName = document.getElementById("first");
-const firstNameError = document.getElementById ("first-name_error")
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
@@ -30,7 +29,6 @@ const location6 = document.getElementById("location6");
 const checkbox1 = document.getElementById("checkbox1");
 const checkbox2 = document.getElementById("checkbox2");
 
-let nameRegExp = new RegExp ("/^[a-zA-Z-À-ÖØ-öø-ÿ]+$/");
 let form = document.getElementById("form");
 
 
@@ -52,50 +50,129 @@ const removeModal = () => {
 closeModal.forEach((close) => close.addEventListener("click", removeModal));
 
 
-form.addEventListener("submit", function validate (e) {
-    // validation du prénom
-    // si le prénom contient des caractères non valides
-    if ((nameRegExp.test(firstName) == false)) {
-      e.preventDefault();
-      firstNameError.innerHTML = "Vous devez saisir un nom valide";
-      firstNameError.style.color = "#e54858";
-      firstNameError.style.fontSize = "0.4em";
-      //si le prénom est inférieur à 2 caractères
-    } else if (firstName.value.trim > 2) {
-      e.preventDefault();
-      firstNameError.innerHTML = "Vous devez saisir un minimum de 2 caractère pour ce champs";
-      firstNameError.style.color = "#e54858";
-      firstNameError.style.fontSize = "0.4em";
-      //sinon ok:
-    } else {
-      $("#submit").unbind('click').click();
-    }
+// ******************************* Les ecoutes **********************
+// Ecouter la modification du prénom
+firstName.addEventListener("change", function() {
+  validfirstName(this);
+});
+// Ecouter la modification du nom
+lastName.addEventListener("change", function() {
+  validlastName(this);
+});
 
-    //validation du nom
-    //si le nom contient des caractères non valides
-    if ((nameRegExp.test(lastName) == false)) {
-      e.preventDefault();
-      lastNameError.innerHTML = "Vous devez saisir un nom valide";
-      lastNameError.style.color = "#e54858";
-      lastNameError.style.fontSize = "0.4em";
-      //si le nom est inférieur à 2 caractères
-    } else if (firstName.value.trim > 2) {
-      e.preventDefault();
-      lastNameError.innerHTML = "Vous devez saisir un minimum de 2 caractère pour ce champs";
-      lastNameError.style.color = "#e54858";
-      lastNameError.style.fontSize = "0.4em";
-      //sinon ok:
-    } else {
-      $("#submit").unbind('click').click();
-    }
+// ********************** Validation du prénom **********************
+const validfirstName = function (firstName) {
+  let msg;
+  let valid = false;
 
-    //validation de la date de naissance
-    let regExpDate = new RegExp ("/^([0-9]{2})|([0-9]{2})|([0-9]{4})$/");
+  //******* Doit contenir uniquement des caractères valides *****
+  //creation de la reg exp pour la validation du prénom
+  let firstNameRegExp = new RegExp ("^[a-zA-Z-À-ÖØ-öø-ÿ]+$","g");
+  //test de l'expression reguliere
+  if(!firstNameRegExp.test(firstName.value)){
+    msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
+  }
+  //******* Doit contenir au minimum 2 caractères *****
+  else if (firstName.value.length < 2 ) {
+    msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
+  }
+  //******* Prénom valide *****
+  else {
+    msg = "Ce champs est valide";
+    valid = true;
+  }
+  //******* Affichage *****
+  //recuperation de la balise span pour le message d'erreur
+  let firstNameError = document.getElementById("first-name_error");
+  if (valid){
+    firstNameError.innerHTML = "";
+    firstNameError.classList.remove("text-error");
+    firstName.classList.remove("text-control--error")
+  } else {
+    firstNameError.innerHTML = msg;
+    firstNameError.classList.add("text-error");
+    firstName.classList.add("text-control--error");
+  }
+};
 
-    if (birthdate.value === "" || (regExpDate.test(birthdate) == false)) {
-      birthdateError.innerHTML= "Veuillez reinseignez ce champs";
-      birthdateError.style.color = "red";
-    }
-    //validation de l'e-mail
 
-  });
+
+// form.addEventListener("submit", function validate (e) {
+  
+//   // annulation du comportement par défaut  
+//   e.preventDefault();
+
+//   // validation du prénom
+//     const firstNameError = document.getElementById ("first-name_error");
+    
+//     //si le prénom est inférieur à 2 caractères
+//     if (firstName.value.trim = "" || firstName.value.trim < 2) {
+//       firstNameError.innerHTML = "Vous devez saisir un minimum de 2 caractère pour ce champs";
+//       firstNameError.addc
+//     }
+    
+//     // si le prénom contient des caractères non valides
+//     else if (!nameRegExp.test(firstName.value)) {
+//       firstNameError.innerHTML = "Vous devez saisir un nom valide";
+//       firstNameError.style.color = "#e54858";
+//       firstNameError.style.fontSize = "0.4em";
+//     }
+
+//     else{
+//       firstNameValidation = true;
+//     };
+
+//     //validation du nom
+//     const lastNameError = document.getElementById ("last-name_error")
+//     //si le nom contient des caractères non valides
+//     if (!nameRegExp.test(lastName.value)) {
+//       lastNameError.innerHTML = "Vous devez saisir un nom valide";
+//       lastNameError.style.color = "#e54858";
+//       lastNameError.style.fontSize = "0.4em";
+//       //si le nom est inférieur à 2 caractères
+//     } else if (firstName.value.length < 2) {
+//       lastNameError.innerHTML = "Vous devez saisir un minimum de 2 caractère pour ce champs";
+//       lastNameError.style.color = "#e54858";
+//       lastNameError.style.fontSize = "0.4em";
+//     } else {
+//       validationLastName = true;
+//     };
+
+//     //validation de l'e-mail
+//     const emailError = document.getElementById ("email_error");
+//     let regExpEmail = new RegExp ("^([a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-zA-Z0-9]{2,3})$", "g");
+
+//     if (!regExpEmail.test(email)) {
+//       emailError.innerHTML = "Veuillez renseigner un email valide";
+//     } else if (email.value.trim ="") {
+//       emailError.innerHTML ="Veuiller renseigner ce champs";
+//     } else {
+//       validationEmail = true;
+//     };
+
+//     //validation de la date de naissance
+//     const birthdateError = document.getElementById ("birthdate_error");
+//     let regExpDate = new RegExp ("^([0-9]{2})|([0-9]{2})|([0-9]{4})$", "g");
+
+//     if (birthdate.value === "" || regExpDate.test(birthdate)) {
+//       birthdateError.innerHTML= "Veuillez renseigner ce champs";
+//       birthdateError.style.color = "red";
+//     } else{
+//       validationBirthdate = true;
+//     }; 
+
+//     //validation du nombre de tournois
+//     let quantityError = document.getElementById ("quantity_error");
+//     if (quantity.value= ""){
+//       quantityError.innerHTML = "Veuiller renseigner ce champs";
+//     } else {
+//       validationQuantity = true;
+//     };
+
+//     // Envoi et validation du formulaire
+//     if ((validationLastName == true) && (validationFirstName == true) && (validationEmail== true) 
+//       && (validationBirthdate== true) && (validationQuantity== true)) {
+//       $("#submit").unbind('click').click();
+//     }
+
+//   });
