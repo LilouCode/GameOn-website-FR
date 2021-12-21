@@ -89,6 +89,10 @@ location5.addEventListener("change", function () {
 location6.addEventListener("change", function () {
   validLocations(this);
 });
+// Ecouter la modifictation de la checkbox conditions d'utilisation
+checkbox1.addEventListener("change", function (){
+  validCheckbox1(this);
+})
 // ********************** Validation du prénom **********************
 const validFirstName = function (firstName) {
   let msg;
@@ -215,7 +219,7 @@ const validQuantity = function (quantity) {
   }
 };
 
-// ********************** Validation locations **********************
+
 quantity.addEventListener("change", function(){})
 
 const validLocations = function (locations) {
@@ -241,6 +245,20 @@ const validLocations = function (locations) {
     locations.classList.remove("text-control--error");
   }
 };
+
+// ********************** Validation locations **********************
+const validCheckbox1 = function (checkbox1){
+  let checkbox1Error = document.getElementById("checkbox1_error");
+  if (checkbox1.checked){
+    checkbox1Error.innerHTML = "";
+    checkbox1Error.classList.remove("text-error");
+    checkbox1.classList.remove("text-control--error");
+  } else{
+    checkbox1Error.innerHTML= "Vous devez accepter les conditions d'utilisation";
+    checkbox1Error.classList.add("text-error");
+    checkbox1.classList.add("text-control--error");
+  }
+}
 // form.addEventListener("submit", function validate (e) {
 
 //   // annulation du comportement par défaut
