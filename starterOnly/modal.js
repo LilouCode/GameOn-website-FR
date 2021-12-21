@@ -53,15 +53,18 @@ closeModal.forEach((close) => close.addEventListener("click", removeModal));
 // ******************************* Les ecoutes **********************
 // Ecouter la modification du prénom
 firstName.addEventListener("change", function() {
-  validfirstName(this);
+  validFirstName(this);
 });
 // Ecouter la modification du nom
 lastName.addEventListener("change", function() {
-  validlastName(this);
+  validLastName(this);
 });
-
+//  Ecouter la modification de l'e-mail
+email.addEventListener("change", function () {
+  validEmail(this);
+})
 // ********************** Validation du prénom **********************
-const validfirstName = function (firstName) {
+const validFirstName = function (firstName) {
   let msg;
   let valid = false;
 
@@ -96,7 +99,7 @@ const validfirstName = function (firstName) {
 };
 
 // ********************** Validation du nom **********************
-const validlastName = function (lastName) {
+const validLastName = function (lastName) {
   let msg;
   let valid = false;
 
@@ -129,6 +132,29 @@ const validlastName = function (lastName) {
     lastName.classList.add("text-control--error");
   }
 };
+
+// ********************** Validation de l'email **********************
+const validEmail = function (email) {
+  //creation de la reg exp pour la validation de l'email
+  let emailRegExp = new RegExp ("^([a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-zA-Z0-9]{2,3})$", "g");
+  //test de l'expression reguliere
+  let emailTest = emailRegExp.test(email.value);
+  // récupération de la balise span pour le message d'erreur
+  let emailError = document.getElementById("email_error");
+
+  if (emailTest) {
+    emailError.innerHTML= "";
+    emailError.classList.remove("text-error");
+    email.classList.remove("text-control--error");
+  }
+  else{
+    emailError.innerHTML= "Veuillez renseigner une adresse e-mail valide";
+    emailError.classList.add("text-error");
+    email.classList.add("text-control--error");
+  }
+};
+
+
 
 // form.addEventListener("submit", function validate (e) {
   
