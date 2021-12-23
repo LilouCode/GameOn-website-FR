@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
@@ -14,7 +16,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /* background-image: url("background.png"); */
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -89,8 +91,6 @@ img {
     text-align: left;
   }
 }
-
-
 
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
@@ -190,8 +190,8 @@ main {
 
 label {
   font-family: var(--font-default);
-  font-size: 17px;
-  font-weight: normal;
+  font-size: 14px;
+  font-weight: 400;
   display: inline-block;
   margin-bottom: 11px;
 }
@@ -210,13 +210,12 @@ input {
 }
 
 .text-error {
-  position: absolute;
-  font-size: 0.4em;
+  font-family: "roboto";
+  font-size: 10px;
   color: #e54858;
   display: block;
   margin-top: 7px;
-  margin-bottom: 7px;
-  line-height: 0.3;
+  line-height: 14,26px;
   transition: 0.3s;
 }
 /* .formData[data-error]::after {
@@ -339,10 +338,10 @@ input[data-error]::after {
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 0 auto;
-  border-radius: 7px;
-  font-size: 1rem;
-  padding: 12px 82px;
+  margin: 4% auto 0 auto;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 3% 11%;
   color: #fff;
   cursor: pointer;
   border: 0;
@@ -416,7 +415,7 @@ input[data-error]::after {
 /* custom select end */
 .text-label {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
 }
 .hero-section {
   min-height: 93vh;
