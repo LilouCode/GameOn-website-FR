@@ -183,7 +183,7 @@ const validLastName = function (lastName) {
 // ********************** Validation de l'email **********************
 const validEmail = function (email) {
   //creation de la reg exp pour la validation de l'email
-  let emailRegExp = new RegExp("^([a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-zA-Z0-9]{2,3})$", "g");
+  let emailRegExp = new RegExp("^([a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-z]{2,3})$", "g");
   //test de l'expression reguliere
   let emailTest = emailRegExp.test(email.value);
   // récupération de la balise span pour le message d'erreur
