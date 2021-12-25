@@ -96,12 +96,34 @@ img {
  @media screen and (max-width: 540px) {
   .topnavresponsive{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 0, 0, 0.1);
+    align-items: center;
+  }
+
+  .topnavresponsive .icon{
+    position: absolute;
+    top: 91px;
+    right: 20px;
+  }
+  .topnavresponsive .header-logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .topnavresponsive .header-logo img{
+    width: 170px;
   }
   .main-navbar{
     display: flex;
     flex-direction: column;
-    background-color: white;
+    /* align-items: center; */
+    float: none;
+    background-color: rgba(255, 0, 0, 0);
     padding: 5%;
+    margin-top: 9%;
   }
   .main-navbar a {
     text-decoration: none;
@@ -114,6 +136,7 @@ img {
     top: 3%;
     right: 4%;
   }
+
   .header-logo{
     margin-top: 4%;
   }
@@ -569,26 +592,35 @@ footer {
     margin: 0;
   }
   .hero-content{
+    padding: 0 2%;
+    margin-left: 0;
+    margin-right: 0%;
+    min-width: unset;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    width: 80%;
-    margin: 0;
-    padding: 0%;
   }
   .hero-headline{
-    width: 90%;
-    padding: 2%;
     font-size: 40px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    line-height: 52px;
   }
   .hero-text{
     margin-top: 0;
-    width: 80%;
     font-size: 13px;
+    line-height: 16px;
+  }
+  /* Formulaire */
+  .bground{
+    top: 64px;
+    background-color: rgba(26, 39, 156, 0);
   }
   .modal-body{
-    max-width: 40px 0;
+    margin: 39px auto;
+  }
+  .formData input {
+    margin-bottom: 3%;
   }
 }
 @keyframes modalopen {
