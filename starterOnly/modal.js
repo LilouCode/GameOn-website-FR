@@ -97,6 +97,7 @@ checkbox1.addEventListener("change", function () {
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   let confirm = document.getElementById("confirm");
+  // si toutes les fonctions de validation sont vraies
   if (
     validFirstName(firstName) &&
     validLastName(lastName) &&
@@ -106,14 +107,17 @@ form.addEventListener("submit", function (e) {
     validLocations(locations) &&
     validCheckbox1(checkbox1)
   ) {
-    confirm.style.display="flex";
-    confirm.style.position="absolute";
+    // Affichage du message de confimration après validation
+    confirm.style.display = "flex";
+    confirm.style.position = "absolute";
     form.style.visibility = "hidden";
-    form.style.position="relative";
-    // form.submit();
+    form.style.position = "relative";
   }
+  // pour la suite: envoi du formulaire
+  // form.submit();
 });
 // ********************** Validation du prénom **********************
+// Creation d'une fonction
 const validFirstName = function (firstName) {
   let msg;
   let valid = false;
@@ -149,21 +153,21 @@ const validFirstName = function (firstName) {
 };
 
 // ********************** Validation du nom **********************
+// fonction identique à la précédente: possibilité de formater en une seule fonction Name par ex
 const validLastName = function (lastName) {
   let msg;
   let valid = false;
 
-  //******* Doit contenir uniquement des caractères valides
-  //creation de la reg exp pour la validation du prénom
-  let lastNameRegExp = new RegExp("^[a-zA-Z-À-ÖØ-öø-ÿ]+$", "g");
-  //test de l'expression reguliere
-  if (!lastNameRegExp.test(lastName.value)) {
-    msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
-  }
-  //******* Doit contenir au minimum 2 caractères
-  else if (lastName.value.length < 2) {
-    msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
-  }
+ // creation de la reg exp pour la validation du nom
+ let lastNameRegExp = new RegExp("^[a-zA-Z-À-ÖØ-öø-ÿ]+$", "g");
+ //******* Doit contenir au minimum 2 caractères
+ if (lastName.value.length < 2) {
+   msg = "Vous devez saisir un minimum de 2 caractères pour ce champs";
+ }
+ // ******* Doit contenir uniquement des caractères valides
+ else if (!lastNameRegExp.test(lastName.value)) {
+   msg = "Veuillez renseigner ce champs uniquement avec des caractères autorisés";
+ }
   //******* Nom valide *****
   else {
     msg = "Ce champs est valide";
@@ -193,17 +197,21 @@ const validEmail = function (email) {
   let emailTest = emailRegExp.test(email.value);
   // récupération de la balise span pour le message d'erreur
   let emailError = document.getElementById("email_error");
-
-  if (emailTest) {
-    emailError.innerHTML = "";
-    emailError.classList.remove("text-error");
-    email.classList.remove("text-control--error");
-    return true;
-  } else {
+  if (email.value.length < 1){
+    emailError.innerHTML = "Veuillez renseigner ce champs";
+    emailError.classList.add("text-error");
+    email.classList.add("text-control--error");
+    return false;
+  }else if (!emailTest) {
     emailError.innerHTML = "Veuillez renseigner une adresse e-mail valide";
     emailError.classList.add("text-error");
     email.classList.add("text-control--error");
     return false;
+  } else {
+    emailError.innerHTML = "";
+    emailError.classList.remove("text-error");
+    email.classList.remove("text-control--error");
+    return true;
   }
 };
 
@@ -215,7 +223,6 @@ const validBirthdate = function (birthdate) {
   let birthdateTest = birthdateRegExp.test(birthdate.value);
   // récupération de la balise span pour le message d'erreur
   let birthdateError = document.getElementById("birthdate_error");
-  console.log(birthdate.value);
   if (birthdateTest) {
     birthdateError.innerHTML = "";
     birthdateError.classList.remove("text-error");
@@ -233,7 +240,6 @@ const validBirthdate = function (birthdate) {
 const validQuantity = function (quantity) {
   // récupération de la balise span pour le message d'erreur
   let quantityError = document.getElementById("quantity_error");
-  console.log(/^[0-9]?[0-9]$/.test(quantity.value));
   if (/^[0-9]?[0-9]$/.test(quantity.value) && quantity.value.trim != "") {
     quantityError.innerHTML = "";
     quantityError.classList.remove("text-error");
