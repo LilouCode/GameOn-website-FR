@@ -47,7 +47,7 @@ const removeModal = () => {
 };
 
 // close modal event
-// closeModal.forEach((close) => close.addEventListener("click", removeModal));
+closeModal.forEach((close) => close.addEventListener("click", removeModal));
 
 // ******************************* Les ecoutes **********************
 // Ecouter la modification du prénom
@@ -96,6 +96,7 @@ checkbox1.addEventListener("change", function () {
 // Ecouter la soumission du formulaire
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+  let confirm = document.getElementById("confirm");
   if (
     validFirstName(firstName) &&
     validLastName(lastName) &&
@@ -105,7 +106,11 @@ form.addEventListener("submit", function (e) {
     validLocations(locations) &&
     validCheckbox1(checkbox1)
   ) {
-    form.submit();
+    confirm.style.display="flex";
+    confirm.style.position="absolute";
+    form.style.visibility = "hidden";
+    form.style.position="relative";
+    // form.submit();
   }
 });
 // ********************** Validation du prénom **********************
@@ -259,10 +264,10 @@ const validLocations = function (locations) {
     locationsError.innerHTML = "";
     locationsError.classList.remove("text-error");
     return true;
-} else {
-  locationsError.innerHTML = "Vous devez choisir une option";
-  locationsError.classList.add("text-error");
-  return false;
+  } else {
+    locationsError.innerHTML = "Vous devez choisir une option";
+    locationsError.classList.add("text-error");
+    return false;
   }
 };
 

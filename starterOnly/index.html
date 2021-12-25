@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <link rel="stylesheet" href="modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link
-      href="https://fonts.googleapis.com/css?family=DM+Sans"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" />
   </head>
   <body>
     
@@ -53,7 +51,7 @@
     <div class="bground">
       <div class="content">
         
-        <span class="close"></span>
+        <span class="closeI close"></span>
         
         <div class="modal-body">
           <form name="reserve" id="form" action="index.html" method="get">
@@ -137,6 +135,12 @@
               <button class="btn-submit" type="submit" class="button"> C'est parti</button>
          
             </form>
+            <div id="confirm">
+              <p id="confirm_text">Merci pour <br>
+              votre inscription </p>
+              <button class="btn-submit close" type="reset" id="confirm_btn">Fermer</button>             
+            </div>
+  
           </div>
         </div>
       </div>
